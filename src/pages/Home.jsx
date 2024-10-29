@@ -13,7 +13,7 @@ function Home() {
                 <Form />
             </div>
             
-            <div id="confirmation" className="modal">Employee Created!</div>
+            {/* <div id="confirmation" className="modal">Employee Created!</div> */}
         </>
     )
 };

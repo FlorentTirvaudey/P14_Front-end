@@ -1,18 +1,7 @@
 import { useSelector } from "react-redux";
+import columns from "../datas/columns";
 
 function TableEmployee () {
-
-    const columns = [
-        { title: 'First Name', data: 'userFirstname' },
-        { title: 'Last Name', data: 'userLastname' },
-        { title: 'Start Date', data: 'startDate' },
-        { title: 'Department', data: 'userDepartment' },
-        { title: 'Date of Birth', data: 'dateOfBirth' },
-        { title: 'Street', data: 'userStreet' },
-        { title: 'City', data: 'userCity' },
-        { title: 'State', data: 'userState' },
-        { title: 'Zip Code', data: 'userZipCode' },
-    ]
 
     const { users } = useSelector((state) => state.user);
 
