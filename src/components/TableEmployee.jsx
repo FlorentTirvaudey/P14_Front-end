@@ -4,6 +4,7 @@ import { useState } from "react";
 import DataTable from 'react-data-table-component';
 
 import columns from "../datas/columns";
+import { Link } from "react-router-dom";
 
 function TableEmployee () {
 
@@ -26,50 +27,35 @@ function TableEmployee () {
 
     console.log("affichage des columns", columns)
 
-    const NoDataComponent = () => {
-        const noDataRow = [
-          {
-            userFirstname: 'Aucune donnée',
-            userLastname: '',
-            userDepartment: '',
-            userCity: '',
-            userState: '',
-            userStartDate: '',
-            userDateOfBirth: '',
-            userStreet: '',
-            userZipCode: '',
-          },
-        ];
-        
-        return (
-          <DataTable
-            title="Employee Data"
-            columns={columns}
-            data={noDataRow} // Utilise une seule ligne avec le message
-            pagination={false} // Pas besoin de pagination pour une seule ligne
-            noHeader // Enlève l'en-tête pour le message
-            style={{ textAlign: 'center', padding: '20px' }} // Ajustement de style
-          />
-        );
-      };
+    console.log("test datas filtrer", filteredData)
 
     return (
-        <div style={{ width: '100%' }}>
-            <input
-                type="text"
-                placeholder="Search..."
-                value={searchText}
-                onChange={e => setSearchText(e.target.value)} // Met à jour le texte de recherche
-                style={{ marginBottom: '10px', padding: '5px' }}
-            />
-            <DataTable
-            columns={columns}
-            data={filteredData}
-            pagination
-            highlightOnHover
-            noDataComponent={<NoDataComponent />}
-            />
-        </div>
+        <>
+            {filteredData.length > 0 ? (
+                <div className="employee_display_content">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchText}
+                        onChange={e => setSearchText(e.target.value)} // Met à jour le texte de recherche
+                        style={{ marginBottom: '10px', padding: '5px' }}
+                    />
+                    <DataTable
+                    columns={columns}
+                    data={filteredData}
+                    pagination
+                    highlightOnHover
+                    />
+                </div>
+            ) : (
+                <div className="no_data_message">
+                    <span>There is no data to display yet, start to create an employee here :</span>
+                    <div>
+                        <Link to="/" className="redirect_error_message">Homepage</Link>
+                    </div>
+                </div>
+            )}
+        </>
     )
 };
 

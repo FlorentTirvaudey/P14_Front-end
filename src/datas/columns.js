@@ -11,11 +11,7 @@ const columns = [
     },
     {
       name: 'Start Date',
-      selector: row => new Date(row.userStartDate).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      }),
+      selector: row => row.userStartDate,
       sortable: true,
     },
     {
@@ -25,11 +21,7 @@ const columns = [
     },
     {
       name: 'Date of Birth',
-      selector: row => new Date(row.userDateOfBirth).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      }),
+      selector: row => row.userDateOfBirth,
       sortable: true,
     },
     {
