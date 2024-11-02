@@ -1,10 +1,10 @@
-function Modal({ content, closeModal, buttonStyle, modaleStyle }) {
+function Modal({ content, closeModal, buttonStyle, modaleStyle, textStyle, overlayStyle }) {
 
     return (
         <>
-            <div className="overlay"></div>
+            <div className={overlayStyle}></div>
             <div className={modaleStyle}>
-                <span>{content}</span>
+                <span className={textStyle}>{content}</span>
                 <button className={buttonStyle} onClick={closeModal}>X</button>
             </div>
         </>

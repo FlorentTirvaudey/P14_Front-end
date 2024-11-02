@@ -8,10 +8,12 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Select, MenuItem } from '@mui/material';
 
 import states from "../datas/states";
 import Modal from "./Modal";
 import dayjs from 'dayjs';
+import department from '../datas/department';
 
 // import DatePicker from 'react-date-picker';
 
@@ -195,58 +197,108 @@ function Form() {
         <>
             <form action="#" id="create-employee" className="form_create_employee" onSubmit={handleSubmit}>
                 <label htmlFor="first-name">First Name</label>
-                <input type="text" id="first-name" name="firstname" onChange={() => setUserFirstname(event.target.value)} />
+                <input type="text" className='form_input' id="first-name" name="firstname" placeholder='Ex: Jean' onChange={() => setUserFirstname(event.target.value)} />
 
                 <label htmlFor="last-name">Last Name</label>
-                <input type="text" id="last-name" name="lastname" onChange={() => setUserLastname(event.target.value)} />
+                <input type="text" className='form_input' id="last-name" name="lastname" placeholder='Ex: John' onChange={() => setUserLastname(event.target.value)} />
 
-                <label htmlFor="date-of-birth">Date of Birth</label>
-                {/* <input id="date-of-birth" type="text" name="dateofbirth" onChange={() => setUserDateOfBirth(event.target.value)} /> */}
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DatePicker']}>
-                        <DatePicker label="Basic date picker" onChange={(newDate) => {
-                            // console.log("nawdate direct", newDate)
-                            // console.log("newdate avec dayjs", dayjs(newDate).format('MM/DD/YYYY'))
-                            setUserDateOfBirth(dayjs(newDate).format('MM/DD/YYYY'))
-                            // console.log("nouvelle date", userDateOfBirth)
-                        }} />
-                    </DemoContainer>
-                </LocalizationProvider>
-
-                <label htmlFor="start-date">Start Date</label>
-                <input id="start-date" type="text" name="startdate" onChange={() => setUserStartDate(event.target.value)} />
+                <div className='datepicker_container'>
+                    <div className='datepicker'>
+                        <div className='datepicker_content'>
+                            <label htmlFor="date-of-birth">Date of Birth</label>
+                            {/* <input id="date-of-birth" type="text" name="dateofbirth" onChange={() => setUserDateOfBirth(event.target.value)} /> */}
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker onChange={(newDate) => {
+                                        // console.log("nawdate direct", newDate)
+                                        // console.log("newdate avec dayjs", dayjs(newDate).format('MM/DD/YYYY'))
+                                        setUserDateOfBirth(dayjs(newDate).format('MM/DD/YYYY'))
+                                        // console.log("nouvelle date", userDateOfBirth)
+                                    }} />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                    </div>
+                    <div className='datepicker'>
+                        <div className='datepicker_content'>
+                            <label htmlFor="start-date">Start Date</label>
+                            {/* <input id="start-date" type="text" name="startdate" onChange={() => setUserStartDate(event.target.value)} /> */}
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker onChange={(newDate) => {
+                                        // console.log("nawdate direct", newDate)
+                                        // console.log("newdate avec dayjs", dayjs(newDate).format('MM/DD/YYYY'))
+                                        setUserStartDate(dayjs(newDate).format('MM/DD/YYYY'))
+                                        // console.log("nouvelle date", userDateOfBirth)
+                                    }} />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                    </div>
+                </div>
 
                 <fieldset className="address">
                     <legend>Address</legend>
 
-                    <label htmlFor="street">Street</label>
-                    <input id="street" type="text" name="street" onChange={() => setUserStreet(event.target.value)} />
-
-                    <label htmlFor="city">City</label>
-                    <input id="city" type="text" name="city" onChange={() => setUserCity(event.target.value)} />
-
-                    <label htmlFor="state">State</label>
-                    <select name="state" id="state" onChange={() => setUserState(event.target.value)}>
-                        {states.map((state) => (
-                            <option key={state.abbreviation}>{state.name}</option>
-                        ))}
-                    </select>
-
-                    <label htmlFor="zip-code">Zip Code</label>
-                    <input id="zip-code" type="number" name="zipcode" onChange={() => setUserZipCode(event.target.value)} />
+                    <div className='address_content'>
+                        <label htmlFor="street">Street</label>
+                        <input id="street" className='form_input' type="text" name="street" placeholder='Ex: 6 rue de la paix' onChange={() => setUserStreet(event.target.value)} />
+                    </div>
+                    <div className='address_content'>
+                        <label htmlFor="city">City</label>
+                        <input id="city" className='form_input' type="text" name="city" placeholder='Ex: Lyon' onChange={() => setUserCity(event.target.value)} />
+                    </div>
+                    <div className='address_content'>
+                        <label htmlFor="state">State</label>
+                        {/* <select name="state" id="state" onChange={() => setUserState(event.target.value)}>
+                            {states.map((state) => (
+                                <option key={state.abbreviation}>{state.name}</option>
+                            ))}
+                        </select> */}
+                        <Select
+                            value={userState}
+                            onChange={() => setUserState(event.target.value)}
+                            displayEmpty
+                            inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                            <MenuItem value="" disabled>Select a state</MenuItem>
+                            {states.map((state) => (
+                                <MenuItem key={state.code} value={state.code}>
+                                    {state.name}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </div>
+                    <div className='address_content'>
+                        <label htmlFor="zip-code">Zip Code</label>
+                        <input id="zip-code" className='form_input' type="number" name="zipcode" placeholder='Ex: 38' onChange={() => setUserZipCode(event.target.value)} />
+                    </div>
                 </fieldset>
 
                 <label htmlFor="department">Department</label>
-                <select name="department" id="department" onChange={() => setUserDepartment(event.target.value)}>
+                <Select
+                            value={userState}
+                            onChange={() => setUserDepartment(event.target.value)}
+                            displayEmpty
+                            inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                            <MenuItem value="" disabled>Select a state</MenuItem>
+                            {department.map((department) => (
+                                <MenuItem key={department.id} value={department.name}>
+                                    {department.name}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                {/* <select name="department" id="department" onChange={() => setUserDepartment(event.target.value)}>
                     <option>Sales</option>
                     <option>Marketing</option>
                     <option>Engineering</option>
                     <option>Human Resources</option>
                     <option>Legal</option>
-                </select>
-                <button>Save</button>
+                </select> */}
+                <button className='form_button'>Save</button>
             </form>
-            {isModalOpened && <Modal content={!isFormError ? "Employee Created !" : "There is an error with datas in form"} closeModal={closeModal} buttonStyle={"button_modal"} modaleStyle={"modal"} />}
+            {isModalOpened && <Modal content={!isFormError ? "Employee Created !" : "There is an error with datas in form"} closeModal={closeModal} textStyle={"modal_content"} buttonStyle={"button_modal"} modaleStyle={"modal"} overlayStyle={"overlay"} />}
         </>
     )
 };

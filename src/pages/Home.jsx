@@ -1,19 +1,13 @@
-import { Link } from "react-router-dom";
 import Form from "../components/Form";
+import Navbar from "../components/Navbar";
 
 function Home() {
     return (
         <>
-            <div className="title">
-                <h1>HRnet</h1>
-            </div>
+            <Navbar title={"Create Employee"} home={true} />
             <div className="container">
-                <Link to="/employee">View Current Employees</Link>
-                <h2>Create Employee</h2>
                 <Form />
-            </div>
-            
-            {/* <div id="confirmation" className="modal">Employee Created!</div> */}
+            </div>    
         </>
     )
 };

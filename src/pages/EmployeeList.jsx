@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import TableEmployee from "../components/TableEmployee";
-import Tab from "../components/Tab";
+import Navbar from "../components/Navbar";
 
     // foreach columns, on créé une table à afficher dans mon DOM avec le return
     // puis faire un map dedans pour ajouter les users récupérer avec useSelector depuis le store
@@ -8,10 +7,9 @@ import Tab from "../components/Tab";
 function EmployeeList() {
     return (
         <>
+        <Navbar title={"Current Employees"} home={false} />
             <div id="employee-div" className="list_employee_container">
-                <h1>Current Employees</h1>
                 <TableEmployee />
-                <Link to="/">Home</Link>
             </div>
         </>
     )
