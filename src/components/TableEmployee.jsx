@@ -31,7 +31,7 @@ function TableEmployee () {
 
     return (
         <>
-            {filteredData.length > 0 ? (
+            {users.length > 0 ? (
                 <div className="employee_display_content">
                     <input
                         type="text"
@@ -45,6 +45,7 @@ function TableEmployee () {
                     data={filteredData}
                     pagination
                     highlightOnHover
+                    persistTableHead={true}
                     />
                 </div>
             ) : (

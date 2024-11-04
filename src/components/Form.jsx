@@ -185,7 +185,6 @@ function Form() {
         }
 
         setIsModalOpened(true);
-
     }
 
     return (
