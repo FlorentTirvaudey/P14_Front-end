@@ -12,7 +12,6 @@ function TableEmployee () {
 
     const [searchText, setSearchText] = useState('');
 
-    // Filtrer les données en fonction de la recherche
     const filteredData = users.filter(item => {
         return (
         item.userFirstname.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -23,12 +22,6 @@ function TableEmployee () {
         );
     });
 
-    console.log("test useSelector pour users", users)
-
-    console.log("affichage des columns", columns)
-
-    console.log("test datas filtrer", filteredData)
-
     return (
         <>
             {users.length > 0 ? (
@@ -37,7 +30,7 @@ function TableEmployee () {
                         type="text"
                         placeholder="Search..."
                         value={searchText}
-                        onChange={e => setSearchText(e.target.value)} // Met à jour le texte de recherche
+                        onChange={e => setSearchText(e.target.value)}
                         style={{ marginBottom: '10px', padding: '5px' }}
                     />
                     <DataTable
