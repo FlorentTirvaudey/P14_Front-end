@@ -15,8 +15,6 @@ import Modal from "./Modal";
 import dayjs from 'dayjs';
 import department from '../datas/department';
 
-// import DatePicker from 'react-date-picker';
-
 function Form() {
 
     // utiliser des states pour stocker localement les datas des input et setState après les onChange
@@ -134,6 +132,8 @@ function Form() {
         console.log(userStreet)
         console.log(userCity)
         console.log("test date", userDateOfBirth)
+        console.log("test du select states", userState)
+        console.log("test du select department", userDepartment)
 
 
         if ((!userFirstname || !userLastname || !userStreet || !userCity)) {
@@ -186,12 +186,7 @@ function Form() {
 
         setIsModalOpened(true);
 
-        // navigate('/employee');  // Remplacer par l'ouverture de la modale
     }
-
-    const { users } = useSelector((state) => state.user);
-    
-    // console.log("user dans le store", users)
 
     return (
         <>
@@ -206,15 +201,9 @@ function Form() {
                     <div className='datepicker'>
                         <div className='datepicker_content'>
                             <label htmlFor="date-of-birth">Date of Birth</label>
-                            {/* <input id="date-of-birth" type="text" name="dateofbirth" onChange={() => setUserDateOfBirth(event.target.value)} /> */}
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['DatePicker']}>
-                                    <DatePicker onChange={(newDate) => {
-                                        // console.log("nawdate direct", newDate)
-                                        // console.log("newdate avec dayjs", dayjs(newDate).format('MM/DD/YYYY'))
-                                        setUserDateOfBirth(dayjs(newDate).format('MM/DD/YYYY'))
-                                        // console.log("nouvelle date", userDateOfBirth)
-                                    }} />
+                                    <DatePicker onChange={(newDate) => setUserDateOfBirth(dayjs(newDate).format('MM/DD/YYYY'))} />
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
@@ -222,15 +211,9 @@ function Form() {
                     <div className='datepicker'>
                         <div className='datepicker_content'>
                             <label htmlFor="start-date">Start Date</label>
-                            {/* <input id="start-date" type="text" name="startdate" onChange={() => setUserStartDate(event.target.value)} /> */}
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['DatePicker']}>
-                                    <DatePicker onChange={(newDate) => {
-                                        // console.log("nawdate direct", newDate)
-                                        // console.log("newdate avec dayjs", dayjs(newDate).format('MM/DD/YYYY'))
-                                        setUserStartDate(dayjs(newDate).format('MM/DD/YYYY'))
-                                        // console.log("nouvelle date", userDateOfBirth)
-                                    }} />
+                                    <DatePicker onChange={(newDate) => setUserStartDate(dayjs(newDate).format('MM/DD/YYYY'))} />
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
@@ -250,20 +233,15 @@ function Form() {
                     </div>
                     <div className='address_content'>
                         <label htmlFor="state">State</label>
-                        {/* <select name="state" id="state" onChange={() => setUserState(event.target.value)}>
-                            {states.map((state) => (
-                                <option key={state.abbreviation}>{state.name}</option>
-                            ))}
-                        </select> */}
                         <Select
                             value={userState}
-                            onChange={() => setUserState(event.target.value)}
+                            onChange={() => setUserState(event.target.textContent)}
                             displayEmpty
                             inputProps={{ 'aria-label': 'Without label' }}
                         >
                             <MenuItem value="" disabled>Select a state</MenuItem>
                             {states.map((state) => (
-                                <MenuItem key={state.code} value={state.code}>
+                                <MenuItem key={state.abbreviation} value={state.name}>
                                     {state.name}
                                 </MenuItem>
                             ))}
@@ -277,25 +255,18 @@ function Form() {
 
                 <label htmlFor="department">Department</label>
                 <Select
-                            value={userState}
-                            onChange={() => setUserDepartment(event.target.value)}
+                            value={userDepartment}
+                            onChange={() => setUserDepartment(event.target.textContent)}
                             displayEmpty
                             inputProps={{ 'aria-label': 'Without label' }}
                         >
-                            <MenuItem value="" disabled>Select a state</MenuItem>
+                            <MenuItem value="" disabled>Select a department</MenuItem>
                             {department.map((department) => (
                                 <MenuItem key={department.id} value={department.name}>
                                     {department.name}
                                 </MenuItem>
                             ))}
                         </Select>
-                {/* <select name="department" id="department" onChange={() => setUserDepartment(event.target.value)}>
-                    <option>Sales</option>
-                    <option>Marketing</option>
-                    <option>Engineering</option>
-                    <option>Human Resources</option>
-                    <option>Legal</option>
-                </select> */}
                 <button className='form_button'>Save</button>
             </form>
             {isModalOpened && <Modal content={!isFormError ? "Employee Created !" : "There is an error with datas in form"} closeModal={closeModal} textStyle={"modal_content"} buttonStyle={"button_modal"} modaleStyle={"modal"} overlayStyle={"overlay"} />}
