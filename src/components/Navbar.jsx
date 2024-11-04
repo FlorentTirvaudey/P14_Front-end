@@ -7,9 +7,15 @@ function Navbar (props) {
     return (
         <>
             <nav className="title">
+                <div className="navbar_content">
                     <h1>HRnet</h1>
+                </div>
+                <div className="navbar_content">
                     <h2>{props.title}</h2>
-                    {home ? <Link to="/employee">View Current Employees</Link> : <Link to="/">Home</Link>}
+                </div>
+                <div className="navbar_content">
+                    {home ? <Link className="links" to="/employee">View Current Employees</Link> : <Link className="links" to="/">Home</Link>}
+                </div>
             </nav>
         </>
     )

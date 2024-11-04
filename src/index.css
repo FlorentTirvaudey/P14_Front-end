@@ -33,6 +33,12 @@ label {
   border-radius: 10px;
 }
 
+.links {
+  color: black;
+  font-size: 1.5em;
+  font-style: italic;
+}
+
 /**
 *   Form page
 **/
@@ -197,4 +203,32 @@ table {
       opacity: 1;
     }
   }  
+}
+
+/**
+* Page 404
+**/
+.errorpage_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.errorpage_container .links {
+  margin-top: 30px;
+}
+
+.title_errorpage {
+  font-size: 4.5em;
+}
+
+/**
+* Navbar
+**/
+.navbar_content {
+  width: 30%;
+  text-align: center;
 }
