@@ -11,9 +11,11 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Select, MenuItem } from '@mui/material';
 
 import states from "../datas/states";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 import dayjs from 'dayjs';
 import department from '../datas/department';
+
+import { Modal } from 'my-custom-modal-p14'
 
 function Form() {
 
