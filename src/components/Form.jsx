@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { addUser } from "../redux/slices/user";
 
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -11,17 +9,13 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Select, MenuItem } from '@mui/material';
 
 import states from "../datas/states";
-// import Modal from "./Modal";
-import dayjs from 'dayjs';
 import department from '../datas/department';
 
-import { Modal } from 'my-custom-modal-p14'
+import dayjs from 'dayjs';
+
+import { Modal } from 'my-custom-modal-p14';
 
 function Form() {
-
-    // utiliser des states pour stocker localement les datas des input et setState après les onChange
-    // dans une fonction HandleSubmit, créer un objet user avec les datas nom, prénom, ... des inputs puis dispatch l'objet user avec addUser dans le store
-    // rajouter HandleSubmit dans le onSubmit du form
 
     const [userFirstname, setUserFirstname] = useState('');
     const [userLastname, setUserLastname] = useState('');
@@ -33,13 +27,6 @@ function Form() {
     const [userDateOfBirth, setUserDateOfBirth] = useState('');
     const [userStartDate, setUserStartDate] = useState('');
 
-    const [isFirstnameValid, setIsFirstnameValid] = useState(false);
-    const [isLastnameValid, setIsLastnameValid] = useState(false);
-    const [isStreetValid, setIsStreetValid] = useState(false);
-    const [isCityValid, setIsCityValid] = useState(false);
-    const [isDateOfBirthValid, setIsDateOfBirthValid] = useState(false);
-    const [isZipCodeValid, setIsZipCodeValid] = useState(false);
-
     const [isModalOpened, setIsModalOpened] = useState(false);
     const [isFormError, setIsFormError] = useState(true);
 
@@ -47,96 +34,14 @@ function Form() {
     const numberRegex = /^\d+$/;
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const closeModal = () => {
         setIsModalOpened(false);
     }
 
-    const validateInput = (name, value) => {
-        switch (name) {
-            case 'firstname':
-                setIsFirstnameValid(!!value);
-                break;
-            case 'lastname':
-                setIsLastnameValid(!!value);
-                break;
-            case 'dateofbirth':
-                setIsDateOfBirthValid(dateRegex.test(value));
-                break;
-            // case 'startdate':
-            //     setUserStartDate(value);
-            //     break;
-            case 'street':
-                setIsStreetValid(!!value);
-                break;
-            case 'city':
-                setIsCityValid(!!value);
-                break;
-            case 'zipcode':
-                setIsZipCodeValid(numberRegex.test(value));
-                break;
-        }
-    }
-
-    const handleChangeInput = (name, value) => {
-        switch (name) {
-            case 'firstname':
-                setUserFirstname(value);
-                break;
-            case 'lastname':
-                setUserLastname(value);
-                break;
-            case 'dateofbirth':
-                setUserDateOfBirth(value);
-                break;
-            case 'startdate':
-                setUserStartDate(value);
-                break;
-            case 'street':
-                setUserStreet(value);
-                break;
-            case 'city':
-                setUserCity(value);
-                break;
-            case 'state':
-                setUserState(value);
-                break;
-            case 'zipcode':
-                setUserZipCode(value);
-                break;
-            case 'department':
-                setUserDepartment(value);
-                break;
-        }
-
-        validateInput(name, value);
-    }
-
     const validateForm = e => {
 
         e.preventDefault();
-
-        // const isFormValid = isFirstnameValid && isLastnameValid && isCityValid && isDateOfBirthValid && isStreetValid && isZipCodeValid;
-
-        // if(!isFormValid) {
-        //     setIsFormError(true);
-        //     console.log("erreur dans la validation du formulaire");
-        //     return false;
-        // } else {
-        //     setIsFormError(false);
-        //     console.log("validation du formulaire");
-        //     return true;
-        // }
-
-        console.log(userFirstname)
-        console.log(userLastname)
-        console.log(userStreet)
-        console.log(userCity)
-        console.log("test date", userDateOfBirth)
-        console.log("test du select states", userState)
-        console.log("test du select department", userDepartment)
-
 
         if ((!userFirstname || !userLastname || !userStreet || !userCity)) {
             e.preventDefault()
@@ -149,11 +54,13 @@ function Form() {
             setIsFormError(true);
             console.log("test error avec datepicker", isFormError)
             return false;
+
         } else if (!userZipCode || !numberRegex.test(userZipCode)) {
             e.preventDefault()
             setIsFormError(true);
             console.log("test error avec zip code", isFormError)
             return false;
+
         } else {
             setIsFormError(false);
             console.log("si je passe là c'est cool", isFormError)
@@ -165,8 +72,6 @@ function Form() {
         e.preventDefault();
 
         let isValid = validateForm(e);
-
-        console.log("test error form", isValid)
 
         if(isValid) {
             const newUser = {
@@ -180,9 +85,7 @@ function Form() {
                 userDateOfBirth,
                 userStartDate
             }
-    
-            console.log("newUser", newUser)
-    
+        
             dispatch(addUser(newUser));
         }
 

@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
 import DataTable from 'react-data-table-component';
 
 import columns from "../datas/columns";
-import { Link } from "react-router-dom";
 
 function TableEmployee () {
 
