@@ -3,7 +3,7 @@ function Modal({ content, closeModal, buttonStyle, modaleStyle, textStyle, overl
     return (
         <>
             <div className={overlayStyle}></div>
-            <div className={modaleStyle}>
+            <div role="dialog" aria-labelledby="modal-title" className={modaleStyle}>
                 <span className={textStyle}>{content}</span>
                 <button className={buttonStyle} onClick={closeModal}>X</button>
             </div>
